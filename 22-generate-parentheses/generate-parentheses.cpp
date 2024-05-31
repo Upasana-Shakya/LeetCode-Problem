@@ -15,7 +15,6 @@ public:
             //backtrack
             output.pop_back();
         }
-
         // Include close bracket
         if(close > open){
             output.push_back(')');
