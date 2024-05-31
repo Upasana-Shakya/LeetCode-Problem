@@ -17,22 +17,10 @@ public:
         return true;
     }
 
-    void storeSol(vector<vector<char>> &board, int n, vector<vector<string>> &ans){
-        vector<string> temp;
-        for(int i=0 ; i<n ; i++){
-            string output = "";
-            for(int j=0 ; j<n ; j++){
-                output.push_back(board[i][j]);
-            }
-            temp.push_back(output);
-        }
-        ans.push_back(temp);
-    }
-
-    void solve(vector<vector<char>> &board, int col, int n, vector<vector<string>> &ans){
+    void solve(vector<vector<char>> &board, int col, int n, int &count){
         //Base case
         if(col >= n){
-            storeSol(board, n, ans);
+            count++;
             return;
         }
 
@@ -46,7 +34,7 @@ public:
                 bottomLeftDiagonalCheck[row+col] = true;
 
                 //Recursive soln
-                solve(board, col+1, n, ans);
+                solve(board, col+1, n, count);
                 
                 // Backtrack
                 board[row][col] = '.';
@@ -58,11 +46,10 @@ public:
     }
     int totalNQueens(int n) {
         vector<vector<char>> board(n, vector<char>(n,'.'));
-        vector<vector<string>> ans;
-
+        int count = 0;
         int col = 0;
-        solve(board, col, n, ans);
+        solve(board, col, n, count);
 
-        return ans.size();
+        return count;
     }
 };
