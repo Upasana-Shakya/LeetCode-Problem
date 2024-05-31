@@ -6,7 +6,6 @@ public:
     unordered_map<int, bool> bottomLeftDiagonalCheck;
 
     bool isSafe(int row, int col, vector<vector<char>> &board, int n){
-        
         if(rowCheck[row] == true){
             return false;
         }
@@ -63,7 +62,6 @@ public:
         vector<vector<string>> ans;
 
         int col = 0;
-
         solve(board, col, n, ans);
 
         return ans;
