@@ -18,7 +18,7 @@ public:
                 sum += d;
                 ch = '-';
             }
-            else{
+            else if(ch == '-'){
                 sum -= d;
                 ch = '+';
             }
