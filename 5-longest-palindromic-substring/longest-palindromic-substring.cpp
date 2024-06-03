@@ -1,7 +1,6 @@
 class Solution {
 public:
     bool isPalindrome(string &s , int i, int j){
-
         while(i < j){
             if(s[i] != s[j]){
                 return false;
