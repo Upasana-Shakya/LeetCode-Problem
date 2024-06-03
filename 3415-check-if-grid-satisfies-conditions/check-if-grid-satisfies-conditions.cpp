@@ -9,7 +9,7 @@ public:
                 if(i+1 < m && grid[i][j] != grid[i+1][j]){
                     return false;
                 }
-                else if(j+1 < n && grid[i][j] == grid[i][j+1]){
+                if(j+1 < n && grid[i][j] == grid[i][j+1]){
                     return false;
                 }
             }
