@@ -15,7 +15,7 @@ public:
         for(int i=0 ; i<n ; i++){
             sum = sum + nums[i];
             if(sum >= k){
-                ans += prefix[sum - k];
+                ans = ans + prefix[sum - k];
             }
             prefix[sum]++;
         }
