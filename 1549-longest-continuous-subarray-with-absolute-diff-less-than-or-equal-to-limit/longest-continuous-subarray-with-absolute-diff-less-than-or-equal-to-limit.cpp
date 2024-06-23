@@ -2,7 +2,10 @@ class Solution {
 public:
     int longestSubarray(vector<int>& nums, int limit) {
         multiset<int>s1;
-        int i,j=0,n=nums.size(),ans=1;
+        int i;
+        int j = 0;
+        int n = nums.size();
+        int ans = 1;
     
         for(i=0;i<n;i++){
             s1.insert(nums[i]);
