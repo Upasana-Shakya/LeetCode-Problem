@@ -13,7 +13,7 @@ public:
                 balance = 0;
             }
         }
-        if(balance >= abs(deficit)){
+        if(balance + deficit >= 0){
             return start;
         }
         else{
