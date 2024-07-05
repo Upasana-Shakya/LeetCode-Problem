@@ -15,8 +15,7 @@ public:
         if(arr.size() < 3){
             return arr[0];
         }
-        else{
-            return arr[2];
-        }
+        return arr[2];
+        
     }
 };
