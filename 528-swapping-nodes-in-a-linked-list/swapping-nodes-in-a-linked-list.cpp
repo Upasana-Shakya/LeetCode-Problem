@@ -34,9 +34,7 @@ public:
         }
 
         // Swap
-        int temp2 = temp->val;
-        temp->val = temp1->val;
-        temp1->val = temp2;
+        swap(temp->val, temp1->val);
 
         return head;
     }
