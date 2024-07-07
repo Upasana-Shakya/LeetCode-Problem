@@ -4,9 +4,9 @@ public:
         int ans = numBottles;
         while(numBottles >= numExchange){
             int rem = numBottles % numExchange;
-            int newFullBottles = numBottles / numExchange;
-            ans += newFullBottles;
-            numBottles  = newFullBottles + rem;
+            numBottles /= numExchange;
+            ans += numBottles;
+            numBottles  += rem;
         }
         return ans;
     }
