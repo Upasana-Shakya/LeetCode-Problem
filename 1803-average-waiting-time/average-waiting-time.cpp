@@ -17,8 +17,6 @@ public:
         for(int i=0 ; i<size ; i++){
             res += waiting_time[i];
         }
-
         return  res/size;
-
     }
 };
