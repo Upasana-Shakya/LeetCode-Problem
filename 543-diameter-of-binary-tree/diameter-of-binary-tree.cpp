@@ -21,10 +21,10 @@ public:
         if(root == NULL){
             return 0;
         }
-        int leftHeight = diameterOfBinaryTree(root->left);
-        int rightHeight = diameterOfBinaryTree(root->right);
+        int left = diameterOfBinaryTree(root->left);
+        int right = diameterOfBinaryTree(root->right);
         int includingRoot = height(root->left)+height(root->right);
 
-        return max(includingRoot, max(leftHeight, rightHeight));
+        return max(includingRoot, max(left, right));
     }
 };
