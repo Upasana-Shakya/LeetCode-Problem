@@ -24,7 +24,6 @@ public:
         if(!root->right){
             return minDepth(root->left)+1;
         }
-        
         return min(minDepth(root->left), minDepth(root->right))+1;
     }
 };
