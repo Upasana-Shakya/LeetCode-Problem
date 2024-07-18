@@ -21,10 +21,9 @@ public:
         if(root == NULL){
             return true;
         }
-        if(abs(height(root->left) - height(root->right)) > 1){
-            return false;
-        }
-        if(isBalanced(root->left) && isBalanced(root->right)){
+        int ans = abs(height(root->left) - height(root->right));
+
+        if((ans <= 1) && isBalanced(root->left) && isBalanced(root->right)){
             return true;
         }
         return false;
