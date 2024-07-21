@@ -8,16 +8,14 @@ public:
             freq[s[i]-'a']++;
         }
         for(int i=0 ; i<26 ; i++){
-            if(freq[i] < 3){
-                ans += freq[i];
+            if(freq[i] == 0){
+                ans += 0;
+            }
+            else if(freq[i]%2 == 0){
+                ans += 2;
             }
             else{
-                if(freq[i]%2 == 0){
-                    ans += 2;
-                }
-                else{
-                    ans += 1;
-                }
+                ans += 1;
             }
         }
         return ans;
