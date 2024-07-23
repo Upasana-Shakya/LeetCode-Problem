@@ -13,8 +13,7 @@ public:
         if(!root){
             return NULL;
         }
-
-        if(root->val == p->val){
+        else if(root->val == p->val){
             return p;
         }
         else if(root->val == q->val){
