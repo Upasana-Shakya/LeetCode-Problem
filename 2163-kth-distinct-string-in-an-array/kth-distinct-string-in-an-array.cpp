@@ -1,13 +1,15 @@
 class Solution {
 public:
     string kthDistinct(vector<string>& arr, int k) {
+        int n = arr.size();
+
         unordered_map<string, int> mp;
 
-        for(auto i : arr){
-            mp[i]++;
+        for(auto s : arr){
+            mp[s]++;
         }
 
-        for(int i=0 ; i<arr.size() ; i++){
+        for(int i=0 ; i<n ; i++){
             if(mp[arr[i]] == 1){
                 k--;
             }
