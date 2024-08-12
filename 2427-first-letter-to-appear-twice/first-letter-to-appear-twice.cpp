@@ -9,6 +9,6 @@ public:
                 return ch;
             }
         }
-        return 'a';
+        return ' ';
     }
 };
