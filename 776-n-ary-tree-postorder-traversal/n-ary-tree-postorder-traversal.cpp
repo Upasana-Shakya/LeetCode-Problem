@@ -26,7 +26,7 @@ public:
             return res;
         }
 
-        for(auto &child : root->children){
+        for(auto child : root->children){
             postorder(child);
         }
         res.push_back(root->val);
