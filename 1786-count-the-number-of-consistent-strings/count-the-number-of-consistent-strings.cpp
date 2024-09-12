@@ -14,7 +14,7 @@ public:
                 if(freq[s[i]-'a'] == 0){
                     break;
                 }
-                if(i == s.size()-1 && freq[s[i]-'a']>0){
+                if(i == s.size()-1){
                     count++;
                 }
             }
