@@ -10,12 +10,7 @@ public:
             int minutes = stoi(curr.substr(3,2));
             int totalMinutes = hours*60 + minutes;
 
-            if(totalMinutes == 0){
-                mit.push_back(1440);
-            }
-            else{
-                mit.push_back(totalMinutes);
-            }
+            mit.push_back(totalMinutes);
         }
 
         sort(mit.begin(), mit.end());
