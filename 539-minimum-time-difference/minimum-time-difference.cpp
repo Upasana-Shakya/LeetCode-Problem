@@ -21,10 +21,8 @@ public:
         sort(mit.begin(), mit.end());
         
         for(int i=0 ; i<n-1 ; i++){
-            for(int j=i+1 ; j<n ; j++){
-                int diff = mit[j]-mit[i];
-                res = min(res, diff);
-            }
+            int diff = mit[i+1]-mit[i];
+            res = min(res, diff);
         }
         int lastDiff1 = (mit[0] + 1440)- mit[n-1];
         int lastDiff2 = mit[n-1] - mit[0];
