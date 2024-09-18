@@ -1,6 +1,5 @@
 class Solution {
 public:
-
     static bool mycomp(string a, string b){
         string x = a+b;
         string y = b+a;
