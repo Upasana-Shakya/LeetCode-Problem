@@ -29,8 +29,6 @@ public:
         if(!root){
             return true;
         }
-        else{
-            return solve(root->left, root->right);
-        }
+        return solve(root->left, root->right);
     }
 };
