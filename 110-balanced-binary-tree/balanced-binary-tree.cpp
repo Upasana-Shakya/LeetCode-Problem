@@ -21,7 +21,7 @@ public:
         if(!root){
             return true;
         }
-        int ans = abs(height(root->left) - height(root->right));
-        return (ans <= 1) && isBalanced(root->left) && isBalanced(root->right);
+        bool ans = abs(abs(height(root->left) - height(root->right)) <= 1);
+        return ans && isBalanced(root->left) && isBalanced(root->right);
     }
 };
