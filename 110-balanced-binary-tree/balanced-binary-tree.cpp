@@ -12,20 +12,18 @@
 class Solution {
 public:
     int height(TreeNode* root){
-        if(root == NULL){
+        if(!root){
             return 0;
         }
         return max(height(root->left), height(root->right))+1;
     }
     bool isBalanced(TreeNode* root) {
-        if(root == NULL){
+        if(!root){
             return true;
         }
-        int ans = abs(height(root->left) - height(root->right));
-
-        if((ans <= 1) && isBalanced(root->left) && isBalanced(root->right)){
-            return true;
+        if(abs(height(root->left) - height(root->right)) > 1){
+            return false;
         }
-        return false;
+        return isBalanced(root->left) && isBalanced(root->right);
     }
 };
