@@ -13,24 +13,24 @@ public:
         if(!root){
             return NULL;
         }
-        else if(root->val == p->val){
+        else if(root == p){
             return p;
         }
-        else if(root->val == q->val){
+        else if(root == q){
             return q;
         }
 
         TreeNode* leftAns = lowestCommonAncestor(root->left, p, q);
         TreeNode* rightAns = lowestCommonAncestor(root->right, p, q);
 
-        if(leftAns == NULL && rightAns == NULL){
+        if(!leftAns && !rightAns){
             return NULL;
         }
-        else if(leftAns != NULL && rightAns == NULL){
-            return leftAns;
-        }
-        else if(leftAns == NULL && rightAns != NULL){
+        else if(!leftAns && rightAns){
             return rightAns;
+        }
+        else if(leftAns && !rightAns){
+            return leftAns;
         }
         else{
             return root;
