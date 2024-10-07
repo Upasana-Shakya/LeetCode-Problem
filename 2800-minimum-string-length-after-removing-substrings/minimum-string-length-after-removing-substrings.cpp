@@ -6,9 +6,8 @@ public:
         for(int i=0 ; i<s.size() ; i++){
             if(st.empty()){
                 st.push(s[i]);
-                continue;
             }
-            if((st.top() == 'A' && s[i] == 'B') || (st.top() == 'C' && s[i] == 'D')){
+            else if((st.top() == 'A' && s[i] == 'B') || (st.top() == 'C' && s[i] == 'D')){
                 st.pop();
             }
             else{
