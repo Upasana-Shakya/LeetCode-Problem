@@ -12,9 +12,7 @@
 class Solution {
 public:
     void solve(TreeNode* root , int target, vector<vector<int>> &res, vector<int> temp){
-        if(!root){
-            return;
-        }
+        if(!root) return;
         if(!root->left && !root->right){
             temp.push_back(root->val);
             target -= root->val;
