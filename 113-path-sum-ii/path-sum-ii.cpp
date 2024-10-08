@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-    void solve(TreeNode* root , int target, vector<vector<int>> &res, vector<int> temp){
+    void solve(TreeNode* root , int target, vector<vector<int>> &res, vector<int>& temp){
         if(!root) return;
         if(!root->left && !root->right){
             temp.push_back(root->val);
@@ -19,12 +19,15 @@ public:
             if(target == 0){
                 res.push_back(temp);
             }
+            temp.pop_back();
             return;
         }
         temp.push_back(root->val);
 
         solve(root->left, target-root->val, res, temp);
         solve(root->right, target-root->val, res, temp);
+
+        temp.pop_back();
 
     }
     vector<vector<int>> pathSum(TreeNode* root, int targetSum) {
