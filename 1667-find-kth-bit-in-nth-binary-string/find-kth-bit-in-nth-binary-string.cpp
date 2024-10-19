@@ -1,9 +1,7 @@
 class Solution {
 public:
     string invert(string s){
-        int n = s.size();
-
-        for(int i=0 ; i<n ; i++){
+        for(int i=0 ; i<s.size() ; i++){
             if(s[i] == '0'){
                 s[i] = '1';
             }
@@ -15,7 +13,6 @@ public:
     }
     char findKthBit(int n, int k) {
         vector<string> vs(n);
-
         vs[0] = "0";
 
         for(int i=1 ; i<n ; i++){
