@@ -6,18 +6,13 @@ public:
         int len = spaces.size();
         int j=0;
 
-        for(int i=0 ; i<n-1 ; i++){
-            
+        for(int i=0 ; i<n ; i++){
             if(j < len && i == spaces[j]){
                 str += " ";
                 j++;
             }
             str += s[i];
         }
-        if(j != len){
-            str += " ";
-        }
-        str += s[n-1];
         return str;
     }
 };
