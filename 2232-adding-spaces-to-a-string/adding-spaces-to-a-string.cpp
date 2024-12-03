@@ -4,22 +4,20 @@ public:
         string str = "";
         int n = s.size();
         int len = spaces.size();
+        int j=0;
 
-        int i=0, j=0;
-        while(i < len && j < n){
-            while(spaces[i] != j && j < n){
-                str += s[j];
+        for(int i=0 ; i<n-1 ; i++){
+            
+            if(j < len && i == spaces[j]){
+                str += " ";
                 j++;
             }
+            str += s[i];
+        }
+        if(j != len){
             str += " ";
-            i++;
         }
-        if(j < n){
-            while(j != n){
-                str += s[j];
-                j++;
-            }
-        }
+        str += s[n-1];
         return str;
     }
 };
