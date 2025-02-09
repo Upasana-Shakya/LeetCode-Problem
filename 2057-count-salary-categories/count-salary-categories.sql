@@ -4,7 +4,7 @@ FROM accounts
 
 UNION
 
-SELECT "Average Salary" as category, SUM(income > 19999 AND income < 50001) as accounts_count
+SELECT "Average Salary" as category, SUM(income BETWEEN 20000 AND 50000) as accounts_count
 FROM accounts
 
 UNION
