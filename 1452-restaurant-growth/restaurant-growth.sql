@@ -1,5 +1,4 @@
 # Write your MySQL query statement below
-# Write your MySQL query statement below
 SELECT distinct visited_on,
     (SELECT SUM(amount)
         FROM Customer as c1
