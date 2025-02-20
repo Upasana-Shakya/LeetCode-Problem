@@ -1,7 +1,7 @@
 class Solution {
 public:
     int n;
-    string generate(string curr, unordered_set<string> numsSet){
+    string generate(string curr, unordered_set<string>& numsSet){
         if(curr.size() == n){
             if(numsSet.find(curr) == numsSet.end()){
                 return curr;
