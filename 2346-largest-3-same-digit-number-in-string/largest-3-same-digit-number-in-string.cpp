@@ -13,10 +13,10 @@ public:
             }
         }
         sort(res.rbegin(), res.rend());
-        string ans = "";
+        
         if(res.size() > 0){
-            ans = res[0];
+            return res[0];
         }
-        return ans;
+        return "";
     }
 };
