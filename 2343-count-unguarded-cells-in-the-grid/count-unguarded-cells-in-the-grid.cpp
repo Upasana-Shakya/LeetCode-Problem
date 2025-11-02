@@ -1,76 +1,35 @@
 class Solution {
 public:
-    void matrixFill(vector<vector<char>> &matrix, int row, int col, int m, int n) {
-    
-    // Down direction
-    for (int i = row + 1; i < m; i++) {
-        if (matrix[i][col] == 'W' || matrix[i][col] == 'G') 
-            break;  // Stop at wall or guard
+    int countUnguarded(int m, int n, vector<vector<int>>& guards, vector<vector<int>>& walls) {
+        vector<vector<int>> grid(m, vector<int>(n, 0)); // 0 = empty, 1 = guard, 2 = wall, 3 = guarded
+        
+        for (auto &g : guards) grid[g[0]][g[1]] = 1;
+        for (auto &w : walls) grid[w[0]][w[1]] = 2;
 
-        matrix[i][col] = 'S'; //Mark safe by 'S'
-    }
+        // Directions: up, down, left, right
+        vector<pair<int,int>> dirs = {{-1,0},{1,0},{0,-1},{0,1}};
 
-    // Right direction
-    for (int j = col + 1; j < n; j++) {
-        if (matrix[row][j] == 'W' || matrix[row][j] == 'G') 
-            break; 
-
-        matrix[row][j] = 'S';
-    }
-
-    // Up direction
-    for (int i = row - 1; i >= 0; i--) {
-        if (matrix[i][col] == 'W' || matrix[i][col] == 'G') 
-            break;
-
-        matrix[i][col] = 'S';
-    }
-
-    // Left direction
-    for (int j = col - 1; j >= 0; j--) {
-        if (matrix[row][j] == 'W' || matrix[row][j] == 'G')
-            break; 
-
-        matrix[row][j] = 'S';
-    }
-}
-
-int countUnguarded(int m, int n, vector<vector<int>> &guards, vector<vector<int>> &walls) {
-    vector<vector<char>> matrix(m, vector<char>(n, '.'));
-
-    // Mark guards
-    for (auto &guard : guards) {
-        int row = guard[0];
-        int col = guard[1];
-        matrix[row][col] = 'G';
-    }
-
-    // Mark walls
-    for (auto &wall : walls) {
-        int row = wall[0];
-        int col = wall[1];
-        matrix[row][col] = 'W';
-    }
-
-    // Fill guarded areas
-    for (int i = 0; i < m; i++) {
-        for (int j = 0; j < n; j++) {
-            if (matrix[i][j] == 'G') {
-                matrixFill(matrix, i, j, m, n);
+        // Mark cells guarded in each direction
+        for (auto &g : guards) {
+            int r = g[0], c = g[1];
+            for (auto [dr, dc] : dirs) {
+                int nr = r + dr, nc = c + dc;
+                while (nr >= 0 && nr < m && nc >= 0 && nc < n && grid[nr][nc] != 1 && grid[nr][nc] != 2) {
+                    if (grid[nr][nc] == 0)
+                        grid[nr][nc] = 3; // Mark guarded
+                    nr += dr;
+                    nc += dc;
+                }
             }
         }
-    }
 
-    // Count unguarded cells
-    int countUnguardedCells = 0;
-    for (int i = 0; i < m; i++) {
-        for (int j = 0; j < n; j++) {
-            if (matrix[i][j] == '.') {
-                countUnguardedCells++;
-            }
-        }
-    }
+        // Count unguarded empty cells
+        int count = 0;
+        for (int i = 0; i < m; i++)
+            for (int j = 0; j < n; j++)
+                if (grid[i][j] == 0)
+                    count++;
 
-    return countUnguardedCells;
-}
+        return count;
+    }
 };
