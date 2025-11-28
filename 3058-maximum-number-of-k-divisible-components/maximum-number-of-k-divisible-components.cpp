@@ -1,30 +1,35 @@
 class Solution {
 public:
-    int ans = 0;
-    unordered_map<int, vector<int>> adj;
-    long dfs(int node, int parent, int &k, vector<int>& values)
-    {
-        long subTreeSum = values[node];
-        for(auto &child : adj[node])
-        {
-            if(child != parent) 
-                subTreeSum += dfs(child, node, k, values);
+    int count = 0;
+    int k;
+    vector<vector<int>> adj;
+    vector<int> values;
+
+    long long dfs(int node, int parent) {
+        long long sum = values[node];
+
+        for (int child : adj[node]) {
+            if (child == parent) continue;
+            sum += dfs(child, node);
+        }
+        if (sum % k == 0) {
+            count++;
+            return 0; 
         }
 
-        if(subTreeSum % k == 0) 
-            ans += 1, subTreeSum = 0;
-        return subTreeSum;
+        return sum; 
     }
-    int maxKDivisibleComponents(int n, vector<vector<int>>& edges, vector<int>& values, int k) 
-    {
-        for(auto &ed : edges)
-        {
-            int u = ed[0], v = ed[1];
-            adj[u].push_back(v);
-            adj[v].push_back(u);
-        }   
-        
-        dfs(0, -1, k, values);
-        return ans; 
+    int maxKDivisibleComponents(int n, vector<vector<int>>& edges, vector<int>& values, int k) {
+        this->k = k;
+        this->values = values;
+        adj.assign(n, {});
+        for (auto &e : edges) {
+            adj[e[0]].push_back(e[1]);
+            adj[e[1]].push_back(e[0]);
+        }
+
+        dfs(0, -1);
+
+        return count;
     }
 };
