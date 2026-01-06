@@ -1,53 +1,34 @@
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
 class Solution {
 public:
-    int maxLevelSum(TreeNode* root) {
-        queue<TreeNode*> q;
-        int maxi = INT_MIN;
-        int index;
-
-        q.push(root);
-        int i=1;
-
-        while(!q.empty()){
-            int sum = 0;
-            int size = q.size();
-    
-            while(size){
-                //Step A
-                TreeNode* temp = q.front();
-
-                //Step B
-                q.pop();
-                
-                //Step C
-                sum += temp->val;
-
-                //Step D
-                if(temp->left){
-                    q.push(temp->left);
-                }
-                if(temp->right){
-                    q.push(temp->right);
-                }
-                size--;
-            }
-            if(maxi < sum){
-                maxi = sum;
-                index = i;
-            }
-            i++;
+    void dfs(TreeNode* node, int level, vector<int>& sumOfNodesAtLevel) {
+        if (node == nullptr) {
+            return;
         }
-        return index;
+
+        if (sumOfNodesAtLevel.size() == level) {
+            sumOfNodesAtLevel.push_back(node->val);
+        } else {
+            sumOfNodesAtLevel[level] += node->val;
+        }
+
+        dfs(node->left, level + 1, sumOfNodesAtLevel);
+        dfs(node->right, level + 1, sumOfNodesAtLevel);
+    }
+
+    int maxLevelSum(TreeNode* root) {
+        vector<int> sumOfNodesAtLevel;
+        dfs(root, 0, sumOfNodesAtLevel);
+
+        int maxSum = INT_MIN;
+        int ans = 0;
+
+        for (int i = 0; i < sumOfNodesAtLevel.size(); i++) {
+            if (maxSum < sumOfNodesAtLevel[i]) {
+                maxSum = sumOfNodesAtLevel[i];
+                ans = i + 1;
+            }
+        }
+
+        return ans;
     }
 };
