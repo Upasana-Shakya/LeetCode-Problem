@@ -1,41 +1,50 @@
 class Solution {
 public:
-    long long minimumCost(string source, string target, vector<char>& original, vector<char>& changed, vector<int>& cost) {
-        int n = 26;
+    long long minimumCost(string source, string target, vector<char>& original,
+                          vector<char>& changed, vector<int>& cost) {
+        // Initialize result to store the total minimum cost
+        long long totalCost = 0;
 
-        vector<vector<int>> disc(n,vector<int>(n,INT_MAX));
+        // Initialize a 2D vector to store the minimum transformation cost
+        // between any two characters
+        vector<vector<long long>> minCost(26, vector<long long>(26, INT_MAX));
 
-        for(int i = 0; i<n; i++){
-            disc[i][i] = 0;
+        // Fill the initial transformation costs from the given original,
+        // changed, and cost arrays
+        for (int i = 0; i < original.size(); ++i) {
+            int startChar = original[i] - 'a';
+            int endChar = changed[i] - 'a';
+            minCost[startChar][endChar] =
+                min(minCost[startChar][endChar], (long long)cost[i]);
         }
 
-        for(int i = 0; i<original.size(); i++){
-            int from = original[i] - 'a';
-            int to = changed[i] - 'a';
-
-            disc[from][to] = min(disc[from][to],cost[i]);
-        }
-
-        for(int k = 0; k<n; k++){
-            for(int i = 0; i<n; i++){
-                for(int j = 0; j<n; j++){
-                    if(disc[i][k] != INT_MAX && disc[k][j] != INT_MAX){
-                        disc[i][j] = min(disc[i][j],disc[i][k]+disc[k][j]);
-                    }
+        // Use Floyd-Warshall algorithm to find the shortest path between any
+        // two characters
+        for (int k = 0; k < 26; ++k) {
+            for (int i = 0; i < 26; ++i) {
+                for (int j = 0; j < 26; ++j) {
+                    minCost[i][j] =
+                        min(minCost[i][j], minCost[i][k] + minCost[k][j]);
                 }
             }
         }
-        long long ans = 0;
-        for(int i = 0; i<source.size(); i++){
-            if(source[i]!=target[i]){
-                int cost = disc[source[i]-'a'][target[i]-'a'];
-                if(cost == INT_MAX){
-                    return -1;
-                } 
 
-                ans += cost;
+        // Calculate the total minimum cost to transform the source string to
+        // the target string
+        for (int i = 0; i < source.size(); ++i) {
+            if (source[i] == target[i]) {
+                continue;
             }
+            int sourceChar = source[i] - 'a';
+            int targetChar = target[i] - 'a';
+
+            // If the transformation is not possible, return -1
+            if (minCost[sourceChar][targetChar] >= INT_MAX) {
+                return -1;
+            }
+            totalCost += minCost[sourceChar][targetChar];
         }
-        return ans;
+
+        return totalCost;
     }
 };
